@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Shows - Netflix Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    @media (max-width: 768px) {
+      .banner__title {
+        font-size: 2rem;
+      }
+      .banner__overview {
+        font-size: 1rem;
+      }
+      .movie-item {
+        min-width: 140px;
+      }
+    }
+    @media (max-width: 480px) {
+      .main-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .action-buttons-cont {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header" class="header">
+    <div class="header-cont container">
+      <div class="left-cont">
+        <a href="index.html"><img class="header-brand" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix" /></a>
+        <ul class="main-nav">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item active"><a href="tvshows.html">TV Shows</a></li>
+        </ul>
+      </div>
+      <div class="right-cont">
+        <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/></svg>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Section -->
+  <section id="banner-section" class="banner-section">
+    <div class="banner-content container">
+      <h1 id="banner-title" class="banner__title">TV Shows</h1>
+      <p id="banner-description" class="banner__overview">Discover popular series powered by the TV Maze API</p>
+    </div>
+    <div class="banner-fadeBottom"></div>
+  </section>
+
+  <!-- TV Shows Container -->
+  <div id="tvshows-cont" class="movies-cont container"></div>
+
+  <script>
+    function init() {
+      loadTVShows();
+    }
+
+    function loadTVShows() {
+      fetch("https://api.tvmaze.com/shows")
+        .then(res => res.json())
+        .then(shows => {
+          displayTVShows(shows.slice(0, 60));
+        })
+        .catch(err => {
+          console.error("Failed to load TV Shows:", err);
+          const container = document.getElementById("tvshows-cont");
+          container.innerHTML = `<h2 style="color:white; padding: 1rem;">Failed to load TV Shows.</h2>`;
+        });
+    }
+
+    function displayTVShows(shows) {
+      const container = document.getElementById("tvshows-cont");
+      container.innerHTML = '';
+
+      const section = document.createElement("section");
+      section.className = "movies-section";
+
+      const header = document.createElement("h2");
+      header.className = "movie-section-heading";
+      header.textContent = "TV Shows";
+      section.appendChild(header);
+
+      const row = document.createElement("div");
+      row.className = "movies-row";
+
+      shows.forEach(show => {
+        const imageUrl = show.image?.medium || "https://via.placeholder.com/210x295?text=No+Image";
+        const div = document.createElement("div");
+        div.className = "movie-item";
+        div.innerHTML = `
+          <img class="move-item-img" src="${imageUrl}" alt="${show.name}" />
+          <p style="color:white; text-align:center;">${show.name}</p>
+        `;
+        row.appendChild(div);
+      });
+
+      section.appendChild(row);
+      container.appendChild(section);
+    }
+
+    window.addEventListener("load", init);
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BatFlix</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header id="header" class="header">
+    <div class="header-cont container">
+      <div class="left-cont">
+        <img class="header-brand" src="image/logo-png.png" alt="Netflix" />
+        <!-- htana he -->
+
+        <ul class="main-nav">
+          <li class="nav-item active">Home</li>
+          <li class="nav-item">TV Shows</li>
+          <li class="nav-item">Movies</li>
+          <li class="nav-item">News & Popular</li>
+          <li class="nav-item">My List</li>
+          <li class="nav-item">Languages</li>
+        </ul>
+      </div>
+      <div class="right-cont">
+        <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/></svg>
+        <svg width="24" height="24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 002 2zm6-6V9c0-3.31-2.69-6-6-6S6 5.69 6 9v7l-2 2v1h16v-1l-2-2z"></path></svg>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User" />
+      </div>
+    </div>
+  </header>
+
+  <section id="banner-section" class="banner-section">
+    <div class="banner-content container">
+      <h1 id="banner-title" class="banner__title">Loading...</h1>
+      <p id="banner-description" class="banner__overview"></p>
+      <div class="action-buttons-cont">
+        <button class="action-button">▶ Play</button>
+        <button class="action-button">ℹ More Info</button>
+      </div>
+    </div>
+    <div class="banner-fadeBottom"></div>
+  </section>
+    <!-- Trailer Video Overlay -->
+<div id="trailer-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:10000;">
+  <div style="position:relative; width:80%; max-width:900px;">
+    <button id="close-trailer" style="position:absolute; top:-40px; right:0; background:red; color:white; border:none; padding:5px 10px; cursor:pointer; font-size:20px;">✖</button>
+    <iframe id="trailer-video" width="100%" height="450" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+<div id="movies-cont" class="movies-cont container"></div>
+
+  <!-- TV Shows Column -->
+  <div id="tvshows-cont" class="movies-cont container"></div>
+
+  <script src="index.js" defer></script>
+</body>
+</html>
